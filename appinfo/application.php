@@ -34,7 +34,6 @@ class Application extends App {
 				$c->query('AppName'), 
 				$c->query('Request'),
 				$c->query('UserId'),
-				$c->query('Config'),
 				$c->query('Logger')
 			);
 		});
@@ -60,10 +59,6 @@ class Application extends App {
 		$container->registerService('Logger', function($c) {
             return $c->query('ServerContainer')->getLogger();
         });		
-		
-		$container->registerService('Config', function($c) {
-            return $c->query('ServerContainer')->getConfig();
-        });
 	}
 
 

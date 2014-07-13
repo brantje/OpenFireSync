@@ -18,9 +18,8 @@ class OpenfireController {
 	private $logger;
 	private $appName;
 
-	public function __construct($appName, $request, $userId, $config, $logger) {
+	public function __construct($appName, $request, $userId,  $logger) {
 		$this -> userId = $userId;
-		$this -> config = $config;
 		$this -> logger = $logger;
 		$this -> appName = $appName;
 	}
@@ -61,11 +60,10 @@ class OpenfireController {
 	}
 
 	public function openFireRequest($params) {
-		$secretKey = 'xONMw7xR';
-		$host = 'dev.cloud.brantje.com';
-		$port = '9090';
+		$secretKey = \OC_Config::getValue( "openfire_secret_key" );
+		$host = \OC_Config::getValue( "openfire_server_url" );
 		$paramsHTTP = http_build_query($params);
-		$url = 'http://' . $host . ':' . $port . '/plugins/userService/userservice?secret=' . $secretKey . '&' . $paramsHTTP;
+		$url = 'http://' . $host .  '/plugins/userService/userservice?secret=' . $secretKey . '&' . $paramsHTTP;
 
 		$response = file_get_contents(str_replace('&amp;', '&', $url));
 		$o = implode(', ', array_map(function($v, $k) {

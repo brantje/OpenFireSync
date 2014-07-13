@@ -44,12 +44,12 @@ class UserHooks {
 		$this -> userManager -> listen('\OC\User', 'postSetPassword', $postsetPassword);
 
 		/* Mange groups */
-		$postAddUserToGroup = function($groups, $user) {
+		$handleGroupChange = function($groups, $user) {
 			$this -> logger -> info('lalalalala', array('app' => $this -> appName));
 			//$this -> openfireController -> updateOpenFireGroups($groups, $user);
 		};
-		$this -> userManager -> listen('\OC\Group', 'postAddUser', $postAddUserToGroup);
-		//$this -> userManager -> listen('\OC\Group', 'postRemoveUser', $postAddUserToGroup);
+		$this -> userManager -> listen('\OC\Group', 'postAddUser', $handleGroupChange);
+		$this -> userManager -> listen('\OC\Group', 'postRemoveUser', $handleGroupChange);
 	}
 
 }

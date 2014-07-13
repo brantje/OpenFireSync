@@ -12,5 +12,8 @@
 namespace OCA\OpenfireSync\AppInfo;
 
 
+\OCP\App::registerAdmin('openfiresync', 'admin');
+
+
 $app = new Application();
 $app->getContainer()->query('UserHooks')->register();
